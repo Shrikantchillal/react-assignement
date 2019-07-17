@@ -36,7 +36,6 @@ class App extends React.Component {
         .then((res) => {
             const contacts = res.data;
             this.setState({contacts});            
-            console.log('data', res.data['address']);
         })
         .catch((error, data) => {
             console.log(error, data);
@@ -45,7 +44,7 @@ class App extends React.Component {
 
     render() {
         const tableHeading = this.state.tableHead.map((data, index)=>{
-            return <th>{data}</th>
+            return <th key={index}>{data}</th>
         });        
         return(
             <div className="container">
@@ -56,12 +55,12 @@ class App extends React.Component {
                     open={this.state.sidebarOpen}
                     overlayId={'pageOverlay'}
                     sidebarId={'pageSidebar'}
-                    styles={{sidebar: { background: "white", width: "250px" }}}
+                    styles={{sidebar: { background: "#fff", width: "250px" }}}
                     children={                        
                         <div className="container">
                             <div className="row">
                                 <div className="col-md-12">
-                                    <table className="table">                                   
+                                    <table className="table">
                                         <thead>
                                             <tr>
                                                 {tableHeading}
