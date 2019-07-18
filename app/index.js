@@ -4,17 +4,16 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Sidebar from 'react-sidebar';
 import SidebarContent from './component/SidebarContent';
-import "../index.css";
+import "../css/index.css";
+import "../css/bootstrap.min.css";
 
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            contacts: [],
+            CONTACTS: [],
             sidebarOpen: false,
-            info : [],
-            showSidebar: false,
-            tableHead : ["ID", "Name", "Username", "Email", "Address"]
+            info : []            
         }
         this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
         this.onSetSidebarClose = this.onSetSidebarClose.bind(this);
@@ -33,11 +32,11 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        const apiUrl =  'http://jsonplaceholder.typicode.com/users';
-        axios.get(apiUrl)
+        const APIURL =  'http://jsonplaceholder.typicode.com/users';
+        axios.get(APIURL)
         .then((res) => {
-            const contacts = res.data;
-            this.setState({contacts});
+            const CONTACTS = res.data;
+            this.setState({CONTACTS});
         })
         .catch((error, data) => {
             console.log(error, data);
@@ -45,7 +44,8 @@ class App extends React.Component {
     }
 
     render() {
-        const tableHeading = this.state.tableHead.map((data, index)=>{
+        const TABLEHEAD = ["ID", "Name", "Username", "Email", "Address"]
+        const TABLEHEADING = TABLEHEAD.map((data, index)=>{
             return <th key={index}>{data}</th>
         });        
         return(
@@ -65,11 +65,11 @@ class App extends React.Component {
                                     <table className="table">
                                         <thead>
                                             <tr>
-                                                {tableHeading}
+                                                {TABLEHEADING}
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {this.state.contacts.map((contact) => (
+                                            {this.state.CONTACTS.map((contact) => (
                                                 <tr key={contact.id} className={ contact.address.zipcode.includes('-') ? '' : 'table-warning' } >                                                
                                                     <td>{contact.id}</td>
                                                     <td>{contact.name}</td>
