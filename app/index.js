@@ -1,8 +1,10 @@
+import "babel-polyfill";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import Sidebar from 'react-sidebar'
-import SidebarContent from './component/SidebarContent'
+import Sidebar from 'react-sidebar';
+import SidebarContent from './component/SidebarContent';
+import "../index.css";
 
 class App extends React.Component {
     constructor(props) {
@@ -12,8 +14,7 @@ class App extends React.Component {
             sidebarOpen: false,
             info : [],
             showSidebar: false,
-            tableHead : ["ID", "Name", "Username", "Email", "Address"],
-            // myState: "sidebarOpen"
+            tableHead : ["ID", "Name", "Username", "Email", "Address"]
         }
         this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
         this.onSetSidebarClose = this.onSetSidebarClose.bind(this);
@@ -32,10 +33,11 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('http://jsonplaceholder.typicode.com/users')
+        const apiUrl =  'http://jsonplaceholder.typicode.com/users';
+        axios.get(apiUrl)
         .then((res) => {
             const contacts = res.data;
-            this.setState({contacts});            
+            this.setState({contacts});
         })
         .catch((error, data) => {
             console.log(error, data);
@@ -55,7 +57,7 @@ class App extends React.Component {
                     open={this.state.sidebarOpen}
                     overlayId={'pageOverlay'}
                     sidebarId={'pageSidebar'}
-                    styles={{sidebar: { background: "#fff", width: "250px" }}}
+                    styles={{sidebar: { background: "#fff", width: "280px" }}}
                     children={                        
                         <div className="container">
                             <div className="row">
@@ -67,7 +69,7 @@ class App extends React.Component {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {this.state.contacts.map((contact, index) => (
+                                            {this.state.contacts.map((contact) => (
                                                 <tr key={contact.id} className={ contact.address.zipcode.includes('-') ? '' : 'table-warning' } >                                                
                                                     <td>{contact.id}</td>
                                                     <td>{contact.name}</td>

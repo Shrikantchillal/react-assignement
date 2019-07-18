@@ -1,0 +1,10 @@
+.address-info span,
+.address-info label {
+    float: left;
+}
+.address-info label {
+    width: 70px;
+}
+.address-info .address-row {
+    overflow: hidden;
+}
