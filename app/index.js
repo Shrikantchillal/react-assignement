@@ -11,7 +11,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            CONTACTS: [],
+            contacts: [],
             sidebarOpen: false,
             info : []            
         }
@@ -36,7 +36,7 @@ class App extends React.Component {
         axios.get(APIURL)
         .then((res) => {
             const CONTACTS = res.data;
-            this.setState({CONTACTS});
+            this.setState({contacts: CONTACTS});
         })
         .catch((error, data) => {
             console.log(error, data);
@@ -69,7 +69,7 @@ class App extends React.Component {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {this.state.CONTACTS.map((contact) => (
+                                            {this.state.contacts.map((contact) => (
                                                 <tr key={contact.id} className={ contact.address.zipcode.includes('-') ? '' : 'table-warning' } >                                                
                                                     <td>{contact.id}</td>
                                                     <td>{contact.name}</td>
